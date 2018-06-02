@@ -16,6 +16,10 @@ class User < ApplicationRecord
   validates_confirmation_of :password
   before_save :encrypt_password
 
+  before_validation(on: :create) do
+    self.username = username.downcase
+  end
+
   def encrypt_password
     if self.password.present?
       self.password_salt = User.hash_to_string(OpenSSL::Random.random_bytes(16))
