@@ -1,6 +1,7 @@
 <div class="user-header text-center">
   <h1 class="title-medium">
     <%= @user.name %>
+
   </h1>
 
   <div class="user-image-div">
@@ -37,6 +38,10 @@
 
 <div class="column-3-4">
   <div class="user-questions buffer-both">
+    <div class="user-questions-counter text-lead">
+      <%= @questions.count %>
+      <%= "#{declension(@questions.count, 'вопрос', 'вопроса', 'вопросов')}" %>
+    </div>
     <div class="questions-list">
       <% @questions.each do |question| %>
         <%= render partial: 'questions/question', object: question %>
