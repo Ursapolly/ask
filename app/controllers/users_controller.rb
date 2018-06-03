@@ -1,38 +1,46 @@
 class UsersController < ApplicationController
+  before_action :load_user, except: [:index, :create, :new]
+
   def index
-    @users = [
-      User.new(
-        id: 1,
-        name: 'Polina',
-        username: 'ursapolly',
-        avatar_url: 'https://img1.ak.crunchyroll.com/i/spire1/89bcf84b15a6cfbe05487ad5864504401488371587_large.png'
-      ),
-      User.new(
-        id: 2,
-        name: 'Irina',
-        username: 'irrr'
-      )
-    ]
+    @users = User.all
   end
 
   def new
+    @user = User.new
   end
 
-  def edit
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to root_url, notice: 'Регистрация прошла успешно!'
+    else
+      render 'new'
+    end
+  end
+
+  def edit; end
+
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'Профиль отредактирован!'
+    else
+      render 'edit'
+    end
   end
 
   def show
-    @user = User.new(
-      name: 'Polina',
-      username: 'ursapolly',
-      avatar_url: 'https://img1.ak.crunchyroll.com/i/spire1/89bcf84b15a6cfbe05487ad5864504401488371587_large.png'
-    )
+    @questions = @user.questions.order(created_at: :desc)
+    @new_question = @user.questions.build
+  end
 
-    @questions = [
-      Question.new(text: 'Как ты?', created_at: Date.parse('02.06.2018')),
-      Question.new(text: 'Любимое время года?', created_at: Date.parse('02.06.2018'))
-    ]
+  private
 
-    @new_question = Question.new
+  def load_user
+    @user ||= User.find params[:id]
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :name, :username, :avatar_url)
   end
 end
