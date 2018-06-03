@@ -7,6 +7,10 @@ module ApplicationHelper
     end
   end
 
+  def fa_icon(icon_class)
+    content_tag 'span', '', class: "fa fa-#{icon_class}"
+  end
+
   def declension(number, vopros, voprosa, voprosov)
     if number.nil? || !number.is_a?(Numeric)
       number = 0
