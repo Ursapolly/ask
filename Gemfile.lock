@@ -51,6 +51,7 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     erubi (1.7.1)
+    execjs (2.7.0)
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -80,6 +81,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    pg (1.0.0)
     rack (2.0.5)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -127,6 +129,8 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uglifier (4.1.11)
+      execjs (>= 0.3.0, < 3)
     web-console (3.6.2)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -144,10 +148,12 @@ DEPENDENCIES
   byebug
   jquery-rails
   listen (>= 3.0.5, < 3.2)
+  pg
   rails (~> 5.2.0)
   sqlite3
   turbolinks
   tzinfo-data
+  uglifier
   web-console (>= 3.3.0)
 
 RUBY VERSION
