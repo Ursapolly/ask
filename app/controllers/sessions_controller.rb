@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     user = User.authenticate(params[:email], params[:password])
@@ -14,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    delete_session
     redirect_to root_url, notice: 'Вы вышли... Возвращайтесь скорее!'
   end
 end

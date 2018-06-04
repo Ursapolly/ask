@@ -22,7 +22,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit;
+  end
 
   def update
     if @user.update(user_params)
@@ -38,6 +39,14 @@ class UsersController < ApplicationController
     @questions_count = @questions.count
     @answers_count = @questions.where.not(answer: nil).count
     @unanswered_count = @questions_count - @answers_count
+  end
+
+  def destroy
+    if @user.delete && @user == current_user
+      @user.destroy
+      delete_session
+      redirect_to root_url, notice: 'Профиль удалён!'
+    end
   end
 
   private
