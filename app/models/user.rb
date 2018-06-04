@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
   validates_format_of :email, :with => /[a-z\d_+.\-]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+/i, :message => 'Введите email'
-  validates_format_of :username, :with =>  /[a-z\d_]+/i, :message =>'Неверный формат юзернейма. Только латинские буквы, цифры и знак'
+  validates_format_of :username, :with =>  /[\w]+/i, :message =>'Неверный формат юзернейма. Только латинские буквы, цифры и знак'
   validates_length_of :username, :maximum => 40, :too_long => 'Имя должно быть не более 40 символов'
 
   attr_accessor :password

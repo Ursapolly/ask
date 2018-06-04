@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     redirect_to root_url, alert: 'Вы уже вошли!' if current_user.present?
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_url, notice: 'Регистрация прошла успешно!'
+      session[:user_id] = @user.id
+      redirect_to user_path(@user), notice: 'Регистрация прошла успешно!'
     else
       render 'new'
     end
