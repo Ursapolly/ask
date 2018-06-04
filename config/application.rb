@@ -30,6 +30,9 @@ module Askme
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    config.i18n.fallbacks = true
+    config.i18n.enforce_available_locales = false
+
     config.time_zone = 'Krasnoyarsk'
     config.i18n.default_locale = :en
     config.i18n.locale = :ru

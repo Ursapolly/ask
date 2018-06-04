@@ -7,9 +7,10 @@ class User < ApplicationRecord
   has_many :questions
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
-  validates_format_of :email, :with => /[a-z\d_+.\-]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+/i, :message => 'Введите email'
-  validates_format_of :username, :with =>  /[\w]+/i, :message =>'Неверный формат юзернейма. Только латинские буквы, цифры и знак'
-  validates_length_of :username, :maximum => 40, :too_long => 'Имя должно быть не более 40 символов'
+  validates_format_of :email, :with => /[a-z\d_+.\-]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+/i
+  validates_format_of :username, :with =>  /[\w]+/i
+  validates_length_of :username, :maximum => 40
+  validates_format_of :header_color, :with => /\A#(?:[\da-z]{3}){1,2}+\z/i, :allow_blank => true
 
   attr_accessor :password
   validates_presence_of :password, on: :create
@@ -17,7 +18,7 @@ class User < ApplicationRecord
   before_save :encrypt_password
 
   before_validation(on: :create) do
-    self.username = username.downcase
+    self.username = username.downcase unless username.nil?
   end
 
   def encrypt_password
