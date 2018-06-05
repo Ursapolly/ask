@@ -2,12 +2,11 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user, except: [:create]
 
-  def edit;
-  end
+  def edit; end
 
   def create
     @question = Question.new(question_params)
-
+    @question.author = current_user
     if @question.save
       redirect_to user_path(@question.user), notice: "Ваш вопрос отправлен #{@question.user.username}."
     else
