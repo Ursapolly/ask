@@ -46,11 +46,9 @@ class QuestionsController < ApplicationController
     end
   end
 
+  private
+
   def check_captcha(model)
-    if current_user.present?
-      true
-    else
-      verify_recaptcha(model: model)
-    end
+    current_user.present? || verify_recaptcha(model: model)
   end
 end
