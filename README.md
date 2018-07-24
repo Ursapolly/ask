@@ -1,24 +1,52 @@
-# README
+# Веб-приложение Askme
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Аналог известного сайта ask.fm, написанный на Rails 5.
 
-Things you may want to cover:
+Программа настроена на работу с Heroku.
 
-* Ruby version
 
-* System dependencies
+## Используемые технологии
 
-* Configuration
+- REcaptcha от Google
 
-* Database creation
 
-* Database initialization
+## Основные функции 
 
-* How to run the test suite
+- Регистрация пользователей
+- Редактирование профиля
+- Возможность задавать вопросы (анонимно в том числе) и отвечать на них
+- Возможность ставить хэштеги и искать по ним вопросы/ответы
 
-* Services (job queues, cache servers, search engines, etc.)
+## Запуск на локальном сервере
 
-* Deployment instructions
+Загрузите репозиторий приложения. 
 
-* ...
+>
+> ВАЖНО! Запустить приложение можно только при помощи bundler. Поэтому предварительно установите гем 'bundle', если у вас его > нет:
+>
+>```
+> gem install bundle
+> ```
+
+Перейдите в териминале в директорию проекта. С помощью команды `bundle install` установите все нужные гемы и зависимости.
+
+Прогоните миграцию:
+
+```
+rake db:migrate
+```
+
+Далее запустите сервер:
+
+```
+rails s
+```
+
+Сайт будет доступен по адресу localhost:3000
+ 
+Для работы recaptcha настройте переменные `RECAPTCHA_SECRET_KEY`, `RECAPTCHA_SITE_KEY`.
+
+
+## Демо
+
+Рабочий сайт доступен по [тут](https://askmethequestion.herokuapp.com)
